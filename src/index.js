@@ -16,6 +16,12 @@ const keyNameValueName = {
   formatTag: (key, value) => `Key=${key},Value=${value}`,
   formatTags: identity
 }
+const keyNameValueNameNoTags = {
+  formatParameter: (key, value) => `ParameterKey=${key},ParameterValue=${value}`,
+  formatParameters: identity,
+  formatTag: () => null,
+  formatTags: () => []
+}
 const keyNameValueNameJoinedCommand = {
   formatParameter: (key, value) => `${key}=${value}`,
   formatParameters: parameters => [parameters.join(',')],
@@ -32,7 +38,13 @@ const parameterTypes = {
   aws: {
     cloudformation: {
       deploy: [parameterOverrides, keyValue],
-      'create-change-set': [parameters, keyNameValueName]
+      'create-change-set': [parameters, keyNameValueName],
+      'create-stack': [parameters, keyNameValueName],
+      'create-stack-instances': [parameterOverrides, keyNameValueNameNoTags],
+      'create-stack-set': [parameters, keyNameValueName],
+      'update-stack': [parameters, keyNameValueName],
+      'update-stack-instances': [parameterOverrides, keyNameValueNameNoTags],
+      'update-stack-set': [parameters, keyNameValueName]
     }
   },
   sam: {
@@ -150,6 +162,9 @@ class TCCommand {
     const { Parameters, Tags } = this.readConfigurationFunction(this.configurationFile)
     const parameterType = this.getParameterType()
     // TODO empty Parameters and Empty Tags
+    const tagArguments = parameterType
+      ? this.getTagArguments(parameterType[1], Tags)
+      : []
     const args = [
       ...this.arguments,
       ...(
@@ -158,8 +173,8 @@ class TCCommand {
           : []
       ),
       ...(
-        parameterType && Object.keys(Tags).length
-          ? ['--tags', ...this.getTagArguments(parameterType[1], Tags)]
+        tagArguments.length
+          ? ['--tags', ...tagArguments]
           : []
       )
     ]

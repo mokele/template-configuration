@@ -3,9 +3,10 @@ CloudFormation + CodePipeline Template Configuration For CLI Tools
 **See Limitations section towards the bottom**
 
 Supported CLI Tools
- - `aws` <https://aws.amazon.com/cli/>
- - `sam` <https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html>
- - `rain` <https://github.com/aws-cloudformation/rain>
+ - `aws cloudformation` <https://aws.amazon.com/cli/>
+   * `deploy | create-stack | create-change-set | create-stack-instances | create-stack-set | update-stack | update-stack-instances | update-stack-set`
+ - `sam deploy` <https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html>
+ - `rain deploy` <https://github.com/aws-cloudformation/rain>
 
 Fed up of the following commands all differing in their parameter overrides and tags parameter formats? and them all differing from how CloudFormation Actions in CodePipeline are configuration?
 
@@ -105,8 +106,7 @@ $ rain deploy ...
  * [ ] add support for `tc --parameters ... [cmd ...]` for 1 single way
      override template configuration file values
  * [ ] test / add support for parameters with quoted values
- * [ ] support other `aws cloudformation <cmd>`s that support parameters - 
-   there are more than the ones currently supported
+ * [ ] support `UsePreviousValue`
 
 
 # Arguments

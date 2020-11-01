@@ -14,12 +14,56 @@ Array [
 ]
 `;
 
-exports[`with readConfigution function aws cloudformation create-change-set with help as last argument does not add parameters 1`] = `
+exports[`with readConfigution function aws cloudformation create-change-set generates command with parameters 2`] = `
 Array [
   "aws",
   "cloudformation",
   "create-change-set",
-  "help",
+  "--parameters",
+  "ParameterKey=key1,ParameterValue=value1",
+  "ParameterKey=key2,ParameterValue=value2",
+  "--tags",
+  "Key=tagKey1,Value=tagValue1",
+  "Key=tagKey2,Value=tagValue2",
+]
+`;
+
+exports[`with readConfigution function aws cloudformation create-stack generates command with parameters 1`] = `
+Array [
+  "aws",
+  "cloudformation",
+  "create-stack",
+  "--parameters",
+  "ParameterKey=key1,ParameterValue=value1",
+  "ParameterKey=key2,ParameterValue=value2",
+  "--tags",
+  "Key=tagKey1,Value=tagValue1",
+  "Key=tagKey2,Value=tagValue2",
+]
+`;
+
+exports[`with readConfigution function aws cloudformation create-stack-instances generates command with parameters 1`] = `
+Array [
+  "aws",
+  "cloudformation",
+  "create-stack-instances",
+  "--parameter-overrides",
+  "ParameterKey=key1,ParameterValue=value1",
+  "ParameterKey=key2,ParameterValue=value2",
+]
+`;
+
+exports[`with readConfigution function aws cloudformation create-stack-set generates command with parameters 1`] = `
+Array [
+  "aws",
+  "cloudformation",
+  "create-stack-set",
+  "--parameters",
+  "ParameterKey=key1,ParameterValue=value1",
+  "ParameterKey=key2,ParameterValue=value2",
+  "--tags",
+  "Key=tagKey1,Value=tagValue1",
+  "Key=tagKey2,Value=tagValue2",
 ]
 `;
 
@@ -43,6 +87,45 @@ Array [
   "cloudformation",
   "deploy",
   "help",
+]
+`;
+
+exports[`with readConfigution function aws cloudformation update-stack generates command with parameters 1`] = `
+Array [
+  "aws",
+  "cloudformation",
+  "update-stack",
+  "--parameters",
+  "ParameterKey=key1,ParameterValue=value1",
+  "ParameterKey=key2,ParameterValue=value2",
+  "--tags",
+  "Key=tagKey1,Value=tagValue1",
+  "Key=tagKey2,Value=tagValue2",
+]
+`;
+
+exports[`with readConfigution function aws cloudformation update-stack-instances generates command with parameters 1`] = `
+Array [
+  "aws",
+  "cloudformation",
+  "update-stack-instances",
+  "--parameter-overrides",
+  "ParameterKey=key1,ParameterValue=value1",
+  "ParameterKey=key2,ParameterValue=value2",
+]
+`;
+
+exports[`with readConfigution function aws cloudformation update-stack-set generates command with parameters 1`] = `
+Array [
+  "aws",
+  "cloudformation",
+  "update-stack-set",
+  "--parameters",
+  "ParameterKey=key1,ParameterValue=value1",
+  "ParameterKey=key2,ParameterValue=value2",
+  "--tags",
+  "Key=tagKey1,Value=tagValue1",
+  "Key=tagKey2,Value=tagValue2",
 ]
 `;
 

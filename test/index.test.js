@@ -125,19 +125,71 @@ describe('with readConfigution function', () => {
         beforeEach(() => {
           cmd.pushArgument('create-change-set')
         })
-
         test('generates command with parameters', () => {
           expect(cmd.getArguments()).toMatchSnapshot()
         })
+      })
 
-        describe('with help as last argument', () => {
-          beforeEach(() => {
-            cmd.pushArgument('help')
-          })
+      describe('create-change-set', () => {
+        beforeEach(() => {
+          cmd.pushArgument('create-change-set')
+        })
+        test('generates command with parameters', () => {
+          expect(cmd.getArguments()).toMatchSnapshot()
+        })
+      })
 
-          test('does not add parameters', () => {
-            expect(cmd.getArguments()).toMatchSnapshot()
-          })
+      describe('create-stack', () => {
+        beforeEach(() => {
+          cmd.pushArgument('create-stack')
+        })
+        test('generates command with parameters', () => {
+          expect(cmd.getArguments()).toMatchSnapshot()
+        })
+      })
+
+      describe('create-stack-instances', () => {
+        beforeEach(() => {
+          cmd.pushArgument('create-stack-instances')
+        })
+        test('generates command with parameters', () => {
+          expect(cmd.getArguments()).toMatchSnapshot()
+        })
+      })
+
+      describe('create-stack-set', () => {
+        beforeEach(() => {
+          cmd.pushArgument('create-stack-set')
+        })
+        test('generates command with parameters', () => {
+          expect(cmd.getArguments()).toMatchSnapshot()
+        })
+      })
+
+      describe('update-stack', () => {
+        beforeEach(() => {
+          cmd.pushArgument('update-stack')
+        })
+        test('generates command with parameters', () => {
+          expect(cmd.getArguments()).toMatchSnapshot()
+        })
+      })
+
+      describe('update-stack-instances', () => {
+        beforeEach(() => {
+          cmd.pushArgument('update-stack-instances')
+        })
+        test('generates command with parameters', () => {
+          expect(cmd.getArguments()).toMatchSnapshot()
+        })
+      })
+
+      describe('update-stack-set', () => {
+        beforeEach(() => {
+          cmd.pushArgument('update-stack-set')
+        })
+        test('generates command with parameters', () => {
+          expect(cmd.getArguments()).toMatchSnapshot()
         })
       })
     })
