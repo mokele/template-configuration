@@ -1,5 +1,7 @@
 CloudFormation + CodePipeline Template Configuration For CLI Tools
 
+**Not currently supported - WIP**
+
 Supported CLI Tools
  - `aws` <https://aws.amazon.com/cli/>
  - `sam` <https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html>
@@ -105,3 +107,5 @@ $ rain deploy ...
  * [ ] test / add support for parameters with quoted values
  * [ ] support other `aws cloudformation <cmd>`s that support parameters - 
    there are more than the ones currently supported
+ * [ ] read default parameter file (parameters currently hardcoded test values)
+ * [ ] override parameter file choice
