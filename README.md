@@ -1,5 +1,7 @@
 CloudFormation + CodePipeline Template Configuration For CLI Tools
 
+_Making development closer to production use of CodePipeline_
+
 **See Limitations section towards the bottom**
 
 Supported CLI Tools
@@ -8,7 +10,7 @@ Supported CLI Tools
  - `sam deploy` <https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html>
  - `rain deploy` <https://github.com/aws-cloudformation/rain>
 
-Fed up of the following commands all differing in their parameter overrides and tags parameter formats? and them all differing from how CloudFormation Actions in CodePipeline are configuration?
+Fed up of the following commands all differing in their parameter overrides and tags parameter formats? and them all differing from how CloudFormation Actions in CodePipeline are configured?
 
 Then do one of these:
 
@@ -19,7 +21,7 @@ $ tc sam deploy ...
 $ tc rain deploy ...
 ```
 
-With a template configuraiton file `template-configuration/default.json` (see <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-cfn-artifacts.html#w2ab1c21c17c15>)
+With a template configuration file `template-configuration/default.json` (see <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-cfn-artifacts.html#w2ab1c21c17c15>)
 ```json
 {
   "Parameters": {
@@ -41,7 +43,7 @@ With a template configuraiton file `template-configuration/default.json` (see <h
 }
 ```
 
-And do away with your flakey non-production-live deploy scripts, **and stop
+And do away with your flakey non-production-like deploy scripts, **and stop
 doing these:**
 
  ```shell
