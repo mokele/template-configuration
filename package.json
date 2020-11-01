@@ -12,12 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mokele/template-configuration.git"
+    "url": "git@github.com:mokele/template-configuration.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "tag": "latest"
   },
+  "files": [
+    "src/*"
+  ],
   "keywords": [
     "aws",
     "aws-cloudformation",
@@ -37,6 +40,7 @@
   "homepage": "https://github.com/mokele/template-configuration#readme",
   "devDependencies": {
     "jest": "^26.0.1",
+    "semantic-release": "^17.2.2",
     "standard": "^16.0.1"
   },
   "standard": {
