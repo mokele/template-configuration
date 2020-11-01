@@ -107,7 +107,6 @@ $ rain deploy ...
  * [ ] test / add support for parameters with quoted values
  * [ ] support other `aws cloudformation <cmd>`s that support parameters - 
    there are more than the ones currently supported
- * [ ] override parameter file choice
 
 
 # Arguments
@@ -116,3 +115,5 @@ Some arguments can come before the proxied command e.g. `tc <here> aws ...`
 
  * `--debug` echos out the command that is also ran
  * `--dryrun` only echo out the command that would otherwise be ran – implies `--debug`
+ * `--config <configuration-file>` override `template-configuration/default.json` with another local file path
+   * e.g. `tc --config template-configuration/test.json sam deploy ...`

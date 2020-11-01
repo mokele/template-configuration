@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`aws cloudformation create-change-set generates command with parameters 1`] = `
+exports[`with readConfigution function aws cloudformation create-change-set generates command with parameters 1`] = `
 Array [
   "aws",
   "cloudformation",
@@ -14,7 +14,7 @@ Array [
 ]
 `;
 
-exports[`aws cloudformation create-change-set with help as last argument does not add parameters 1`] = `
+exports[`with readConfigution function aws cloudformation create-change-set with help as last argument does not add parameters 1`] = `
 Array [
   "aws",
   "cloudformation",
@@ -23,7 +23,7 @@ Array [
 ]
 `;
 
-exports[`aws cloudformation deploy generates command with parameters 1`] = `
+exports[`with readConfigution function aws cloudformation deploy generates command with parameters 1`] = `
 Array [
   "aws",
   "cloudformation",
@@ -37,7 +37,7 @@ Array [
 ]
 `;
 
-exports[`aws cloudformation deploy with help as last argument does not add parameters 1`] = `
+exports[`with readConfigution function aws cloudformation deploy with help as last argument does not add parameters 1`] = `
 Array [
   "aws",
   "cloudformation",
@@ -46,14 +46,14 @@ Array [
 ]
 `;
 
-exports[`aws non-parameter command generates command with parameters 1`] = `
+exports[`with readConfigution function aws non-parameter command generates command with parameters 1`] = `
 Array [
   "aws",
   "sts",
 ]
 `;
 
-exports[`rain deploy generates command with parameters 1`] = `
+exports[`with readConfigution function rain deploy generates command with parameters 1`] = `
 Array [
   "rain",
   "deploy",
@@ -64,7 +64,7 @@ Array [
 ]
 `;
 
-exports[`rain deploy with --help as last argument does not add parameters 1`] = `
+exports[`with readConfigution function rain deploy with --help as last argument does not add parameters 1`] = `
 Array [
   "rain",
   "deploy",
@@ -72,7 +72,7 @@ Array [
 ]
 `;
 
-exports[`rain deploy with -h as last argument does not add parameters 1`] = `
+exports[`with readConfigution function rain deploy with -h as last argument does not add parameters 1`] = `
 Array [
   "rain",
   "deploy",
@@ -80,7 +80,7 @@ Array [
 ]
 `;
 
-exports[`sam deploy generates command with parameters 1`] = `
+exports[`with readConfigution function sam deploy generates command with parameters 1`] = `
 Array [
   "sam",
   "deploy",
@@ -93,7 +93,7 @@ Array [
 ]
 `;
 
-exports[`sam deploy with --help as last argument does not add parameters 1`] = `
+exports[`with readConfigution function sam deploy with --help as last argument does not add parameters 1`] = `
 Array [
   "sam",
   "deploy",

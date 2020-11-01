@@ -1,0 +1,18 @@
+{
+  "Parameters": {
+    "Key": "Test"
+  },
+  "Tags": {
+    "TagKey": "TagTest"
+  },
+  "StackPolicy": {
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "NotAction": "Update:Delete",
+        "Principal": "*",
+        "Resource": "*"
+      }
+    ]
+  }
+}

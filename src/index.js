@@ -83,12 +83,20 @@ class TCCommand {
 
   pushArgument (arg) {
     if (this.arguments.length === 0) {
-      switch (arg) {
-        case '--dryrun':
-          this.dryRun = true
-        case '--debug':
-          this.loggingEnabled = true
-          return
+      if (arg === '--dryrun') {
+        this.dryRun = true
+        this.loggingEnabled = true
+        return
+      } else if (arg === '--debug') {
+        this.loggingEnabled = true
+        return
+      } else if (['-c', '--config'].indexOf(arg) > -1) {
+        this.nextArgumentConfig = true
+        return
+      } else if (this.nextArgumentConfig) {
+        this.configurationFile = path.resolve(arg)
+        delete this.nextArgumentConfig
+        return
       }
     }
     this.arguments.push(arg)
