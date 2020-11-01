@@ -10,16 +10,15 @@
   "scripts": {
     "test": "jest"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
-    "url": "git@github.com:mokele/template-configuration.git"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "tag": "latest"
+    "url": "git+https://github.com/mokele/template-configuration.git"
   },
   "files": [
-    "src/*"
+    "src"
   ],
   "keywords": [
     "aws",
