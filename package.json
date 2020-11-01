@@ -25,7 +25,7 @@
     "template-configuration",
     "codepipeline"
   ],
-  "author": "Steven Gravell",
+  "author": "Steven Gravell <steve@mokele.co.uk>",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/mokele/template-configuration/issues"
