@@ -1,6 +1,6 @@
 CloudFormation + CodePipeline Template Configuration For CLI Tools
 
-**Not currently supported - WIP**
+**See Limitations section towards the bottom**
 
 Supported CLI Tools
  - `aws` <https://aws.amazon.com/cli/>
@@ -107,5 +107,12 @@ $ rain deploy ...
  * [ ] test / add support for parameters with quoted values
  * [ ] support other `aws cloudformation <cmd>`s that support parameters - 
    there are more than the ones currently supported
- * [ ] read default parameter file (parameters currently hardcoded test values)
  * [ ] override parameter file choice
+
+
+# Arguments
+
+Some arguments can come before the proxied command e.g. `tc <here> aws ...`
+
+ * `--debug` echos out the command that is also ran
+ * `--dryrun` only echo out the command that would otherwise be ran – implies `--debug`

@@ -8,6 +8,9 @@ Array [
   "--parameters",
   "ParameterKey=key1,ParameterValue=value1",
   "ParameterKey=key2,ParameterValue=value2",
+  "--tags",
+  "Key=tagKey1,Value=tagValue1",
+  "Key=tagKey2,Value=tagValue2",
 ]
 `;
 
@@ -28,6 +31,9 @@ Array [
   "--parameter-overrides",
   "key1=value1",
   "key2=value2",
+  "--tags",
+  "tagKey1=tagValue1",
+  "tagKey2=tagValue2",
 ]
 `;
 
@@ -40,7 +46,7 @@ Array [
 ]
 `;
 
-exports[`aws cloudformation non-parameter command generates command with parameters 1`] = `
+exports[`aws non-parameter command generates command with parameters 1`] = `
 Array [
   "aws",
   "sts",
@@ -53,6 +59,8 @@ Array [
   "deploy",
   "--params",
   "key1=value1,key2=value2",
+  "--tags",
+  "tagKey1=tagValue1,tagKey2=tagValue2",
 ]
 `;
 
@@ -79,6 +87,9 @@ Array [
   "--parameter-overrides",
   "ParameterKey=key1,ParameterValue=value1",
   "ParameterKey=key2,ParameterValue=value2",
+  "--tags",
+  "Key=tagKey1,Value=tagValue1",
+  "Key=tagKey2,Value=tagValue2",
 ]
 `;
 

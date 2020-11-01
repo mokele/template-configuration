@@ -1,11 +1,60 @@
-const { TestScheduler } = require('jest')
-const { tc } = require('../src/')
+const { TCCommand } = require('../src/')
 
-describe('aws cloudformation', () => {
+const readConfig = jest.fn().mockReturnValue({
+  Parameters: {
+    key1: 'value1',
+    key2: 'value2'
+  },
+  Tags: {
+    tagKey1: 'tagValue1',
+    tagKey2: 'tagValue2'
+  }
+})
+
+let cmd
+beforeEach(() => {
+  cmd = new TCCommand()
+})
+
+describe('no readConfiguration function', () => {
+  beforeEach(() => {
+    cmd = new TCCommand()
+    cmd.pushArguments(['aws', 'sts'])
+  })
+
+  test('getArguments throws', () => {
+    expect(() => cmd.getArguments())
+      .toThrow()
+  })
+})
+
+describe('--dryrun', () => {
+  let log = jest.fn()
+  beforeEach(() => {
+    cmd.setLogger(log)
+    cmd.readConfiguration(readConfig)
+    cmd.pushArguments(['--dryrun', 'aws', 'sts'])
+  })
+
+  test('isDryRun is true', () => {
+    expect(cmd.isDryRun()).toBe(true)
+  })
+
+  test('logged command', () => {
+    cmd.getArguments()
+    expect(log).toHaveBeenCalledWith('aws sts')
+  })
+})
+
+describe('aws', () => {
+  beforeEach(() => {
+    cmd.pushArgument('aws')
+    cmd.readConfiguration(readConfig)
+  })
+
   describe('non-parameter command', () => {
-    let cmd
     beforeEach(() => {
-      cmd = tc(['aws', 'sts'])
+      cmd.pushArgument('sts')
     })
 
     test('generates command with parameters', () => {
@@ -13,54 +62,62 @@ describe('aws cloudformation', () => {
     })
   })
 
-  describe('deploy', () => {
-    let cmd
+  describe('cloudformation', () => {
     beforeEach(() => {
-      cmd = tc(['aws', 'cloudformation', 'deploy'])
+      cmd.pushArgument('cloudformation')
+      cmd.readConfiguration(readConfig)
     })
 
-    test('generates command with parameters', () => {
-      expect(cmd.getArguments()).toMatchSnapshot()
-    })
-
-    describe('with help as last argument', () => {
+    describe('deploy', () => {
       beforeEach(() => {
-        cmd.pushArgument('help')
+        cmd.pushArgument('deploy')
       })
 
-      test('does not add parameters', () => {
+      test('generates command with parameters', () => {
         expect(cmd.getArguments()).toMatchSnapshot()
       })
-    })
-  })
 
-  describe('create-change-set', () => {
-    let cmd
-    beforeEach(() => {
-      cmd = tc(['aws', 'cloudformation', 'create-change-set'])
+      describe('with help as last argument', () => {
+        beforeEach(() => {
+          cmd.pushArgument('help')
+        })
+
+        test('does not add parameters', () => {
+          expect(cmd.getArguments()).toMatchSnapshot()
+        })
+      })
     })
 
-    test('generates command with parameters', () => {
-      expect(cmd.getArguments()).toMatchSnapshot()
-    })
-
-    describe('with help as last argument', () => {
+    describe('create-change-set', () => {
       beforeEach(() => {
-        cmd.pushArgument('help')
+        cmd.pushArgument('create-change-set')
       })
 
-      test('does not add parameters', () => {
+      test('generates command with parameters', () => {
         expect(cmd.getArguments()).toMatchSnapshot()
+      })
+
+      describe('with help as last argument', () => {
+        beforeEach(() => {
+          cmd.pushArgument('help')
+        })
+
+        test('does not add parameters', () => {
+          expect(cmd.getArguments()).toMatchSnapshot()
+        })
       })
     })
   })
 })
 
 describe('sam', () => {
+  beforeEach(() => {
+    cmd.readConfiguration(readConfig)
+    cmd.pushArgument('sam')
+  })
   describe('deploy', () => {
-    let cmd
     beforeEach(() => {
-      cmd = tc(['sam', 'deploy'])
+      cmd.pushArgument('deploy')
     })
 
     test('generates command with parameters', () => {
@@ -80,10 +137,13 @@ describe('sam', () => {
 })
 
 describe('rain', () => {
+  beforeEach(() => {
+    cmd.pushArgument('rain')
+    cmd.readConfiguration(readConfig)
+  })
   describe('deploy', () => {
-    let cmd
     beforeEach(() => {
-      cmd = tc(['rain', 'deploy'])
+      cmd.pushArgument('deploy')
     })
 
     test('generates command with parameters', () => {

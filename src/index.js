@@ -1,18 +1,26 @@
+const path = require('path')
+
 const params = '--params'
 const parameters = '--parameters'
 const parameterOverrides = '--parameter-overrides'
 const identity = v => v
 const keyValue = {
   formatParameter: (key, value) => `${key}=${value}`,
-  formatParameters: identity
+  formatParameters: identity,
+  formatTag: (key, value) => `${key}=${value}`,
+  formatTags: identity
 }
 const keyNameValueName = {
   formatParameter: (key, value) => `ParameterKey=${key},ParameterValue=${value}`,
-  formatParameters: identity
+  formatParameters: identity,
+  formatTag: (key, value) => `Key=${key},Value=${value}`,
+  formatTags: identity
 }
 const keyNameValueNameJoinedCommand = {
   formatParameter: (key, value) => `${key}=${value}`,
-  formatParameters: parameters => [parameters.join(',')]
+  formatParameters: parameters => [parameters.join(',')],
+  formatTag: (key, value) => `${key}=${value}`,
+  formatTags: tags => [tags.join(',')]
 }
 
 const helpCommands = {
@@ -37,13 +45,36 @@ const parameterTypes = {
 
 class TCCommand {
   constructor () {
+    this.logger = console.error
+    this.loggingEnabled = false
+    this.dryRun = false
     this.command = null
     this.commandName = null
     this.arguments = []
-    this.parameters = {
-      key1: 'value1',
-      key2: 'value2'
+    this.configurationFile = path.resolve('template-configuration', 'default.json')
+    this.readConfigurationFunction = f => {
+      throw new Error('No configuration read function defined')
     }
+  }
+
+  isDryRun () {
+    return this.dryRun
+  }
+
+  setLogger (logger) {
+    this.logger = logger
+  }
+
+  log (str) {
+    if (!this.loggingEnabled) {
+      return
+    }
+
+    this.logger(str)
+  }
+
+  readConfiguration (f) {
+    this.readConfigurationFunction = f
   }
 
   pushArguments (args) {
@@ -51,6 +82,15 @@ class TCCommand {
   }
 
   pushArgument (arg) {
+    if (this.arguments.length === 0) {
+      switch (arg) {
+        case '--dryrun':
+          this.dryRun = true
+        case '--debug':
+          this.loggingEnabled = true
+          return
+      }
+    }
     this.arguments.push(arg)
   }
 
@@ -78,33 +118,49 @@ class TCCommand {
     }
   }
 
-  getParameterArguments({ formatParameter, formatParameters }) {
-    const keys = Object.keys(this.parameters)
+  getParameterArguments({ formatParameter, formatParameters }, parameters) {
+    const keys = Object.keys(parameters)
     return formatParameters(
       keys.reduce(
-        (acc, key) => [...acc, formatParameter(key, this.parameters[key])],
+        (acc, key) => [...acc, formatParameter(key, parameters[key])],
+        []
+      )
+    )
+  }
+
+  getTagArguments({ formatTag, formatTags }, tags) {
+    const keys = Object.keys(tags)
+    return formatTags(
+      keys.reduce(
+        (acc, key) => [...acc, formatTag(key, tags[key])],
         []
       )
     )
   }
 
   getArguments () {
+    const { Parameters, Tags } = this.readConfigurationFunction(this.configurationFile)
     const parameterType = this.getParameterType()
-    return [
+    // TODO empty Parameters and Empty Tags
+    const args = [
       ...this.arguments,
       ...(
-        parameterType
-          ? [parameterType[0], ...this.getParameterArguments(parameterType[1])]
+        parameterType && Object.keys(Parameters).length
+          ? [parameterType[0], ...this.getParameterArguments(parameterType[1], Parameters)]
+          : []
+      ),
+      ...(
+        parameterType && Object.keys(Tags).length
+          ? ['--tags', ...this.getTagArguments(parameterType[1], Tags)]
           : []
       )
     ]
+
+    this.log(args.join(' '))
+    return args
   }
 }
 
-const tc = ([...args]) => {
-  const cmd = new TCCommand()
-  cmd.pushArguments(args)
-  return cmd
+module.exports = {
+  TCCommand
 }
-
-module.exports = { tc }
