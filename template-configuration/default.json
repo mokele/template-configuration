@@ -1,0 +1,18 @@
+{
+  "Parameters": {
+    "Key": "Value"
+  },
+  "Tags": {
+    "TagKey": "TagValue"
+  },
+  "StackPolicy": {
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "NotAction": "Update:Delete",
+        "Principal": "*",
+        "Resource": "*"
+      }
+    ]
+  }
+}

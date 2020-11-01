@@ -1,0 +1,48 @@
+{
+  "name": "template-configuration",
+  "version": "1.0.0",
+  "description": "CloudFormation + CodePipeline Template Configuration For CLI Tools",
+  "main": "src/index.js",
+  "bin": {
+    "tc": "src/bin.js",
+    "template-configuration": "src/bin.js"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mokele/template-configuration.git"
+  },
+  "keywords": [
+    "aws",
+    "aws-cloudformation",
+    "aws-sam",
+    "aws-sam-cli",
+    "aws-cli",
+    "aws-rain",
+    "aws-rain-cli",
+    "template-configuration",
+    "codepipeline"
+  ],
+  "author": "Steven Gravell",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/mokele/template-configuration/issues"
+  },
+  "homepage": "https://github.com/mokele/template-configuration#readme",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  }
+}

@@ -5,9 +5,9 @@ Supported CLI Tools
  - `sam` <https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html>
  - `rain` <https://github.com/aws-cloudformation/rain>
 
-Fed up of the following commands all differing in their parameter overrides and tags parameter formats?
+Fed up of the following commands all differing in their parameter overrides and tags parameter formats? and them all differing from how CloudFormation Actions in CodePipeline are configuration?
 
-Do one of these:
+Then do one of these:
 
 ```shell
 $ tc aws cloudformation deploy ...
@@ -16,29 +16,30 @@ $ tc sam deploy ...
 $ tc rain deploy ...
 ```
 
-With a default tempalte configuraiton file `template-configuration/default.json` (see <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-cfn-artifacts.html#w2ab1c21c17c15>)
+With a template configuraiton file `template-configuration/default.json` (see <https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-cfn-artifacts.html#w2ab1c21c17c15>)
 ```json
 {
-  "Parameters" : {
-    "Key" : "Value"
+  "Parameters": {
+    "Key": "Value"
   },
-  "Tags" : {
-    "TagKey" : "TagValue"
+  "Tags": {
+    "TagKey": "TagValue"
   }, 
-  "StackPolicy" : {
-    "Statement" : [
+  "StackPolicy": {
+    "Statement": [
       {
-        "Effect" : "Allow",
-        "NotAction" : "Update:Delete",
+        "Effect": "Allow",
+        "NotAction": "Update:Delete",
         "Principal": "*",
-        "Resource" : "*"
+        "Resource": "*"
       }
     ]
   }
 }
 ```
 
-**so you don't have to do any of these:**
+And do away with your flakey non-production-live deploy scripts, **and stop
+doing these:**
 
  ```shell
  $ aws cloudformation deploy \
@@ -70,4 +71,37 @@ $ rain \
     Key=Value,Key2=Value2
 ```
 
+# Implicit Proxy
 
+Add the following to your shell rc/profile file to replace `aws`, `sam`,
+and/or `rain` with implicit `tc` proxying (e.g. `~/.bashrc`, `~/.zshrc`, etc)
+
+```shell
+aws () { template-configuration "$0" "$@" }
+sam () { template-configuration "$0" "$@" }
+rain () { template-configuration "$0" "$@" }
+```
+
+Then `tc` is implicit and no longer needed
+
+```shell
+$ aws cloudformation deploy ...
+$ aws cloudformation create-change-set ...
+$ sam deploy ...
+$ rain deploy ...
+```
+
+# Limitations
+
+ * only supports commands without global arguments between them (where they
+   would otherwise be supported)
+   * supported `aws cloudformation deploy ... --profile <profile> --region <region>`
+   * **not-supported** `aws --profile <profile> --region <region> cloudformation deploy ...`
+ * only supports proxying to help commands where help arguments are the last argument e.g. `aws cloudformation deploy help`
+ * does not and _does not plan to_ support merging each commands existing
+   parameter arguments with a template configuration file
+ * [ ] add support for `tc --parameters ... [cmd ...]` for 1 single way
+     override template configuration file values
+ * [ ] test / add support for parameters with quoted values
+ * [ ] support other `aws cloudformation <cmd>`s that support parameters - 
+   there are more than the ones currently supported

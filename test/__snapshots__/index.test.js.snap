@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`aws cloudformation create-change-set generates command with parameters 1`] = `
+Array [
+  "aws",
+  "cloudformation",
+  "create-change-set",
+  "--parameters",
+  "ParameterKey=key1,ParameterValue=value1",
+  "ParameterKey=key2,ParameterValue=value2",
+]
+`;
+
+exports[`aws cloudformation create-change-set with help as last argument does not add parameters 1`] = `
+Array [
+  "aws",
+  "cloudformation",
+  "create-change-set",
+  "help",
+]
+`;
+
+exports[`aws cloudformation deploy generates command with parameters 1`] = `
+Array [
+  "aws",
+  "cloudformation",
+  "deploy",
+  "--parameter-overrides",
+  "key1=value1",
+  "key2=value2",
+]
+`;
+
+exports[`aws cloudformation deploy with help as last argument does not add parameters 1`] = `
+Array [
+  "aws",
+  "cloudformation",
+  "deploy",
+  "help",
+]
+`;
+
+exports[`aws cloudformation non-parameter command generates command with parameters 1`] = `
+Array [
+  "aws",
+  "sts",
+]
+`;
+
+exports[`rain deploy generates command with parameters 1`] = `
+Array [
+  "rain",
+  "deploy",
+  "--params",
+  "key1=value1,key2=value2",
+]
+`;
+
+exports[`rain deploy with --help as last argument does not add parameters 1`] = `
+Array [
+  "rain",
+  "deploy",
+  "--help",
+]
+`;
+
+exports[`rain deploy with -h as last argument does not add parameters 1`] = `
+Array [
+  "rain",
+  "deploy",
+  "-h",
+]
+`;
+
+exports[`sam deploy generates command with parameters 1`] = `
+Array [
+  "sam",
+  "deploy",
+  "--parameter-overrides",
+  "ParameterKey=key1,ParameterValue=value1",
+  "ParameterKey=key2,ParameterValue=value2",
+]
+`;
+
+exports[`sam deploy with --help as last argument does not add parameters 1`] = `
+Array [
+  "sam",
+  "deploy",
+  "--help",
+]
+`;
