@@ -32,7 +32,11 @@
   },
   "homepage": "https://github.com/mokele/template-configuration#readme",
   "devDependencies": {
-    "jest": "^26.0.1"
+    "jest": "^26.0.1",
+    "standard": "^16.0.1"
+  },
+  "standard": {
+    "env": "jest"
   },
   "jest": {
     "collectCoverage": true,

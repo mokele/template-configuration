@@ -138,7 +138,7 @@ class TCCommand {
     }
   }
 
-  getParameterArguments({ formatParameter, formatParameters }, parameters) {
+  getParameterArguments ({ formatParameter, formatParameters }, parameters) {
     const keys = Object.keys(parameters)
     return formatParameters(
       keys.reduce(
@@ -148,7 +148,7 @@ class TCCommand {
     )
   }
 
-  getTagArguments({ formatTag, formatTags }, tags) {
+  getTagArguments ({ formatTag, formatTags }, tags) {
     const keys = Object.keys(tags)
     return formatTags(
       keys.reduce(

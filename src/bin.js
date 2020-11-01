@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const child_process = require('child_process')
+const childProcess = require('child_process')
 const fs = require('fs')
 const { TCCommand } = require('.')
 
@@ -10,9 +10,9 @@ const main = (args) => {
   command.setLogger(console.log)
   command.readConfiguration(file => JSON.parse(fs.readFileSync(file)))
   command.pushArguments(args)
-  const arguments = command.getArguments()
+  const cmdArguments = command.getArguments()
   if (!command.isDryRun()) {
-    child_process.spawnSync('command', arguments, { stdio: 'inherit' })
+    childProcess.spawnSync('command', cmdArguments, { stdio: 'inherit' })
   }
 }
 

@@ -1,7 +1,6 @@
 const { TCCommand } = require('../src/')
 const path = require('path')
 
-
 let cmd
 beforeEach(() => {
   cmd = new TCCommand()
@@ -36,8 +35,9 @@ describe('with readConfigution function', () => {
   })
 
   describe('--dryrun', () => {
-    let log = jest.fn()
+    let log
     beforeEach(() => {
+      log = jest.fn()
       cmd.setLogger(log)
       cmd.pushArguments(['--dryrun', 'aws', 'sts'])
       cmd.getArguments()
@@ -53,8 +53,9 @@ describe('with readConfigution function', () => {
   })
 
   describe('--debug', () => {
-    let log = jest.fn()
+    let log
     beforeEach(() => {
+      log = jest.fn()
       cmd.setLogger(log)
       cmd.pushArguments(['--debug', 'aws', 'sts'])
       cmd.getArguments()
