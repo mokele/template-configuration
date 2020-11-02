@@ -28,6 +28,12 @@ const keyNameValueNameJoinedCommand = {
   formatTag: (key, value) => `${key}=${value}`,
   formatTags: tags => [tags.join(',')]
 }
+const nameValue = {
+  formatParameter: (key, value) => `Name=${key},Value=${value}`,
+  formatParameters: identity,
+  formatTag: (key, value) => `Key=${key},Value=${value}`,
+  formatTags: identity
+}
 
 const helpCommands = {
   aws: ['help'],
@@ -45,6 +51,9 @@ const parameterTypes = {
       'update-stack': [parameters, keyNameValueName],
       'update-stack-instances': [parameterOverrides, keyNameValueNameNoTags],
       'update-stack-set': [parameters, keyNameValueName]
+    },
+    serverlessrepo: {
+      'create-cloud-formation-change-set': [parameterOverrides, nameValue]
     }
   },
   sam: {

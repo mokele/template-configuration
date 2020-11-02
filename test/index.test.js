@@ -194,6 +194,22 @@ describe('with readConfigution function', () => {
         })
       })
     })
+
+    describe('serverlessrepo', () => {
+      beforeEach(() => {
+        cmd.pushArgument('serverlessrepo')
+      })
+
+      describe('create-cloud-formation-change-set', () => {
+        beforeEach(() => {
+          cmd.pushArgument('create-cloud-formation-change-set')
+        })
+
+        test('generates command with parameters', () => {
+          expect(cmd.getArguments()).toMatchSnapshot()
+        })
+      })
+    })
   })
 
   describe('sam', () => {

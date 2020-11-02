@@ -136,6 +136,20 @@ Array [
 ]
 `;
 
+exports[`with readConfigution function aws serverlessrepo create-cloud-formation-change-set generates command with parameters 1`] = `
+Array [
+  "aws",
+  "serverlessrepo",
+  "create-cloud-formation-change-set",
+  "--parameter-overrides",
+  "Name=key1,Value=value1",
+  "Name=key2,Value=value2",
+  "--tags",
+  "Key=tagKey1,Value=tagValue1",
+  "Key=tagKey2,Value=tagValue2",
+]
+`;
+
 exports[`with readConfigution function rain deploy generates command with parameters 1`] = `
 Array [
   "rain",

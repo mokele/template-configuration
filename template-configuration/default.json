@@ -3,7 +3,8 @@
     "Key": "Value"
   },
   "Tags": {
-    "TagKey": "TagValue"
+    "TagKey1": "TagValue1",
+    "TagKey2": "TagValue2"
   },
   "StackPolicy": {
     "Statement": [

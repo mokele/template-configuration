@@ -109,6 +109,9 @@ $ rain deploy ...
      override template configuration file values
  * [ ] test / add support for parameters with quoted values
  * [ ] support `UsePreviousValue`
+ * [ ] `tc help --help -h`
+ * [ ] support `StackPolicy` for those commands that support it, and maybe do
+     2nd api call if needed for those where it is not
 
 
 # Arguments
