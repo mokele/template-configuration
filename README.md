@@ -7,6 +7,7 @@ _Making development closer to production use of CodePipeline_
 Supported CLI Tools
  - `aws cloudformation` <https://aws.amazon.com/cli/>
    * `deploy | create-stack | create-change-set | create-stack-instances | create-stack-set | update-stack | update-stack-instances | update-stack-set`
+ - `aws serverlessrepo create-cloud-formation-change-set` <https://aws.amazon.com/cli/>
  - `sam deploy` <https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html>
  - `rain deploy` <https://github.com/aws-cloudformation/rain>
 
