@@ -145,8 +145,7 @@ Array [
   "Name=key1,Value=value1",
   "Name=key2,Value=value2",
   "--tags",
-  "Key=tagKey1,Value=tagValue1",
-  "Key=tagKey2,Value=tagValue2",
+  "Key=tagKey1,Value=tagValue1,Key=tagKey2,Value=tagValue2",
 ]
 `;
 
@@ -185,8 +184,8 @@ Array [
   "ParameterKey=key1,ParameterValue=value1",
   "ParameterKey=key2,ParameterValue=value2",
   "--tags",
-  "Key=tagKey1,Value=tagValue1",
-  "Key=tagKey2,Value=tagValue2",
+  "tagKey1=tagValue1",
+  "tagKey2=tagValue2",
 ]
 `;
 

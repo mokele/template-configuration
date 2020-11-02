@@ -28,11 +28,17 @@ const keyNameValueNameJoinedCommand = {
   formatTag: (key, value) => `${key}=${value}`,
   formatTags: tags => [tags.join(',')]
 }
+const keyNameValueNameKeyValueTags = {
+  formatParameter: (key, value) => `ParameterKey=${key},ParameterValue=${value}`,
+  formatParameters: identity,
+  formatTag: (key, value) => `${key}=${value}`,
+  formatTags: identity
+}
 const nameValue = {
   formatParameter: (key, value) => `Name=${key},Value=${value}`,
   formatParameters: identity,
   formatTag: (key, value) => `Key=${key},Value=${value}`,
-  formatTags: identity
+  formatTags: tags => [tags.join(',')]
 }
 
 const helpCommands = {
@@ -57,7 +63,7 @@ const parameterTypes = {
     }
   },
   sam: {
-    deploy: [parameterOverrides, keyNameValueName]
+    deploy: [parameterOverrides, keyNameValueNameKeyValueTags]
   },
   rain: {
     deploy: [params, keyNameValueNameJoinedCommand]
