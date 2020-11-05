@@ -8,6 +8,7 @@
     "template-configuration": "src/bin.js"
   },
   "scripts": {
+    "lint": "standard",
     "test": "jest"
   },
   "publishConfig": {

@@ -13,15 +13,74 @@ describe('no readConfiguration function', () => {
   })
 
   test('getArguments throws', () => {
-    expect(() => cmd.getArguments())
-      .toThrow()
+    expect(() => cmd.getArguments()).toThrow()
+  })
+})
+
+describe('init', () => {
+  beforeEach(() => {
+    cmd = new TCCommand()
+    cmd.pushArguments(['init'])
+  })
+
+  test('isOwnCommand', () => {
+    expect(cmd.isOwnCommand()).toBe(true)
+  })
+
+  test('without existsConfigurationFunction', () => {
+    expect(() => cmd.run()).toThrow()
+  })
+
+  describe('with existsConfigurationFunction => true', () => {
+    let writeConfig, existsConfig
+    beforeEach(() => {
+      writeConfig = jest.fn()
+      existsConfig = jest.fn().mockReturnValue(true)
+      cmd.existsConfiguration(existsConfig)
+      cmd.writeConfiguration(writeConfig)
+    })
+
+    test('throws file exist', () => {
+      expect(() => cmd.run()).toThrow()
+      expect(existsConfig).toHaveBeenCalled()
+    })
+
+    test('does not call writeConfiguration', () => {
+      expect(writeConfig).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('with existsConfigurationFunction => false', () => {
+    let existsConfig
+    beforeEach(() => {
+      existsConfig = jest.fn().mockReturnValue(false)
+      cmd.existsConfiguration(existsConfig)
+    })
+
+    test('without writeConfigurationFunction', () => {
+      expect(() => cmd.run()).toThrow()
+      expect(existsConfig).toHaveBeenCalled()
+    })
+
+    describe('with writeConfigurationFile', () => {
+      let writeConfig
+      beforeEach(() => {
+        writeConfig = jest.fn()
+        cmd.writeConfiguration(writeConfig)
+        cmd.run()
+      })
+
+      test('calls writeConfig', () => {
+        expect(writeConfig).toHaveBeenCalled()
+      })
+    })
   })
 })
 
 describe('with readConfigution function', () => {
   let readConfig
   beforeEach(() => {
-    readConfig = jest.fn().mockReturnValue({
+    readConfig = jest.fn().mockReturnValue(JSON.stringify({
       Parameters: {
         key1: 'value1',
         key2: 'value2'
@@ -30,7 +89,7 @@ describe('with readConfigution function', () => {
         tagKey1: 'tagValue1',
         tagKey2: 'tagValue2'
       }
-    })
+    }))
     cmd.readConfiguration(readConfig)
   })
 

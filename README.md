@@ -119,6 +119,8 @@ $ rain deploy ...
 
 Some arguments can come before the proxied command e.g. `tc <here> aws ...`
 
+ * `tc init` create a `template-configuration/default.json` file, with optional
+   additional `--config` argument
  * `--debug` echos out the command that is also ran
  * `--dryrun` only echo out the command that would otherwise be ran – implies `--debug`
  * `--config <configuration-file>` override `template-configuration/default.json` with another local file path

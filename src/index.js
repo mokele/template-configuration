@@ -75,12 +75,19 @@ class TCCommand {
     this.logger = console.error
     this.loggingEnabled = false
     this.dryRun = false
+    this.ownCommand = null
     this.command = null
     this.commandName = null
     this.arguments = []
     this.configurationFile = path.resolve('template-configuration', 'default.json')
     this.readConfigurationFunction = f => {
       throw new Error('No configuration read function defined')
+    }
+    this.existsConfigurationFunction = f => {
+      throw new Error('No configuration exists function defined')
+    }
+    this.writeConfigurationFunction = f => {
+      throw new Error('No configuration write function defined')
     }
   }
 
@@ -104,6 +111,14 @@ class TCCommand {
     this.readConfigurationFunction = f
   }
 
+  existsConfiguration (f) {
+    this.existsConfigurationFunction = f
+  }
+
+  writeConfiguration (f) {
+    this.writeConfigurationFunction = f
+  }
+
   pushArguments (args) {
     args.forEach(arg => this.pushArgument(arg))
   }
@@ -123,6 +138,9 @@ class TCCommand {
       } else if (this.nextArgumentConfig) {
         this.configurationFile = path.resolve(arg)
         delete this.nextArgumentConfig
+        return
+      } else if (arg === 'init') {
+        this.ownCommand = 'init'
         return
       }
     }
@@ -174,7 +192,7 @@ class TCCommand {
   }
 
   getArguments () {
-    const { Parameters, Tags } = this.readConfigurationFunction(this.configurationFile)
+    const { Parameters, Tags } = JSON.parse(this.readConfigurationFunction(this.configurationFile))
     const parameterType = this.getParameterType()
     // TODO empty Parameters and Empty Tags
     const tagArguments = parameterType
@@ -196,6 +214,32 @@ class TCCommand {
 
     this.log(args.join(' '))
     return args
+  }
+
+  isOwnCommand () {
+    return Boolean(this.ownCommand)
+  }
+
+  init () {
+    this.loggingEnabled = true // implicit
+
+    if (this.existsConfigurationFunction(this.configurationFile)) {
+      throw new Error(`${this.configurationFile} already exists - not overwriting`)
+    }
+
+    this.writeConfigurationFunction(this.configurationFile, JSON.stringify({
+      Parameters: {},
+      Tags: {},
+      StackPolicy: {
+        Statement: []
+      }
+    }, null, 2))
+
+    this.log(`written ${this.configurationFile}`)
+  }
+
+  run () {
+    this.init()
   }
 }
 
