@@ -7,15 +7,18 @@ const { TCCommand } = require('.')
 const main = (args) => {
   // TODO is linux vs windows any different here?
   const command = new TCCommand()
+
   command.setLogger(console.log)
   command.readConfiguration(fs.readFileSync)
   command.existsConfiguration(fs.existsSync)
   command.writeConfiguration(fs.writeFileSync)
   command.pushArguments(args)
   if (command.isOwnCommand()) {
-    command.run()
-  } else if (!command.isDryRun()) {
-    const cmdArguments = command.getArguments()
+    return command.run()
+  }
+
+  const cmdArguments = command.getArguments()
+  if (!command.isDryRun()) {
     childProcess.spawnSync('command', cmdArguments, { stdio: 'inherit' })
   }
 }
