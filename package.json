@@ -40,7 +40,7 @@
   "homepage": "https://github.com/mokele/template-configuration#readme",
   "devDependencies": {
     "jest": "^26.0.1",
-    "semantic-release": "^17.2.2",
+    "semantic-release": "^19.0.3",
     "standard": "^16.0.1"
   },
   "standard": {
